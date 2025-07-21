@@ -1,0 +1,49 @@
+This is going to be a VERY unorganized txt file. Also, please notice the alliteration in the name 
+of this file.
+
+I intend to keep a log of what I am thinking along the way in creating this system. I will often 
+not think in the correct order and will jump around and ahead and refactor things idk. Also will include 
+slang/abbreviations/short hands/probably incorrect terminology and spellings etc. This is purely intended for future
+me to see how I was thinking in this time period.
+
+---------
+
+Okay first I am already thinking about how to tackle PDF embeddings.
+https://www.anthropic.com/news/contextual-retrieval - this seems good but too slow and heavy. probably 
+wont use this.
+https://jina.ai/news/late-chunking-in-long-context-embedding-models/ - seems promising. may use this somehow.
+will see how.
+
+I am thinking using Qwen3 0.6B - very high on MTEB, fairly small (~600M) and multilingual with a 32K
+context window. Nice.
+
+Unstructured seems to be the library I think I will use for parsing/chunking. especially the hi_res mode 
+looks very powerful.
+
+hold on if i need to include images, I need a multimodal model. will have to check mmeb leaderboard.
+
+
+file system/adding to vector db
+- will have to calculate a file hash to make sure the file is not updates since the prev embedding
+- if a file does not exist anymore, the vector db entries to be removed
+- multiple processes for subdirectories? could work?
+- I think one db with one big collection with metadata filtering can work
+
+plan for now - 
+
+one db with one collection at a fixed file location. collecn will look like - 
+id, embedding, {filepath, last modified time, filename}
+
+given a path,
+
+get sets of files and subdirs from disk with last modified
+get sets of files and subdirs from db
+find embeddings to delete
+find files/subdirs to embed and add
+find files/subdirs to update (delete old embeddings and then crate new ones)
+
+if the path not in db at all (no embeddings generated), embed and go to search
+
+if path in db go to search. new files to be added have been added already.
+
+for search add condition/conditions such that search is limited to curr and sub dirs
