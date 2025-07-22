@@ -74,3 +74,5 @@ just had the genius idea of wrapping everything in a class why didnt i think of 
 cant think of how to use late chunking here so will stick to semi-context aware emebeddings (model context limitations)
 
 once the fs state is prepared will use that to get the mod times since we already have that.
+
+to facilitate the search will also store path and filename in metadata cause that can be used with the eq condition seems like the best way
