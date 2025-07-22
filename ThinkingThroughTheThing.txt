@@ -47,3 +47,30 @@ if the path not in db at all (no embeddings generated), embed and go to search
 if path in db go to search. new files to be added have been added already.
 
 for search add condition/conditions such that search is limited to curr and sub dirs
+
+will use "jinaai/jina-clip-v2" as the embedding model since this supports embedding
+text and images. must be careful around diff file types when encoding since giving
+only the file path name may encode the string itself.
+
+chroma requires ids when adding embeddings since one doc can have multiple embeddings
+also chroma docs say - 
+    you can supply a list of document-associated embeddings directly, and Chroma will store the 
+    associated documents without embedding them itself. Note that in this case 
+    there will be no guarantee that the embedding is mapped to the document associated with it.
+what? why would they do that? i want to create embeddings in batches separately
+must implement a custom embedding function
+
+for images the documents in chroma has cannot be a blob so in case of images will have to keep the name of the file only. and as far as I can tell the library allows for
+images to be embedded with the filename only. so no need to handle images separately.
+
+when scanning files, ignore foles and folders that start with "."
+
+originally wanted to delete entire subdirs (if deleted from fs) with one command but seems like regex is not supported in metadata filtering sp maybe not
+
+wow chroma does not support any kind of prefix for "like" when metadata filtering so preppring the db for search will mean doing everything manually
+
+just had the genius idea of wrapping everything in a class why didnt i think of this earlier
+
+cant think of how to use late chunking here so will stick to semi-context aware emebeddings (model context limitations)
+
+once the fs state is prepared will use that to get the mod times since we already have that.
