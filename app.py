@@ -366,12 +366,13 @@ class LFSSS:
         files_to_add = self._find_files_to_add(filesystem_files, db_files)
         self._add_files_to_db(files_to_add)
 
-    def search(self, query: str, path: str) -> dict:
+    def search(self, query: str, path: str, n_results: int) -> dict:
         """
         Search the database for files matching the query in the specified path.
         Args:
             query (str): The search query.
             path (str): The directory path to search in.
+            n_results (int): The number of search results to return.
         Returns:
             dict: The search results containing documents and metadata.
         """
@@ -397,7 +398,7 @@ class LFSSS:
 
         results = self.collection.query(
             query_embeddings=[query_embedding],
-            n_results=5,
+            n_results=n_results,
             where=where_clause,
             include=["documents", "metadatas"],
         )

@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "chromadb>=1.0.15",
+    "customtkinter>=5.2.2",
     "einops>=0.8.1",
     "libmagic>=1.0",
     "pandas>=2.3.1",
