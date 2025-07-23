@@ -76,3 +76,5 @@ cant think of how to use late chunking here so will stick to semi-context aware 
 once the fs state is prepared will use that to get the mod times since we already have that.
 
 to facilitate the search will also store path and filename in metadata cause that can be used with the eq condition seems like the best way
+
+file types tested - pdf, txt, md, csv, png, jpg, bmp, tiff, gif, docx, xlsx. all of them work lessgoooo
